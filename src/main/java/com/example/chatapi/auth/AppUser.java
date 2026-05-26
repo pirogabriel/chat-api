@@ -14,15 +14,20 @@ public class AppUser {
     private String username;
     private String password;
     private String role;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     public AppUser(){}
 
-    public AppUser(String username, String password, String role, Date createdAt){
+    public AppUser(String username, String password, String role){
         this.username = username;
         this.password = password;
         this.role = role;
-        this.createdAt = createdAt;
+    }
+    @PrePersist
+    public void prePersist(){
+        this.createdAt = new Date();
     }
 
     public Integer getId(){return id;}

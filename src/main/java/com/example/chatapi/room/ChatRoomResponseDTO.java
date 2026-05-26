@@ -4,7 +4,7 @@ public class ChatRoomResponseDTO {
     private Integer id;
     private String name;
 
-    public ChatRoomResponseDTO(String name){
+    public ChatRoomResponseDTO(Integer id, String name){
         this.id = id;
         this.name = name;
     }

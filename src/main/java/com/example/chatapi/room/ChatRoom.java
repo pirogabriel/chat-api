@@ -12,14 +12,19 @@ public class ChatRoom {
     private Integer id;
 
     private String name;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
     public ChatRoom(){}
 
-    public ChatRoom(String name, Date createdAt){
+    public ChatRoom(String name){
         this.name = name;
-        this.createdAt = createdAt;
     }
+    @PrePersist
+    public void prePersist(){
+        this.createdAt = new Date();
+    }
+
     public Integer getId(){return id;}
     public String getName(){return name;}
     public Date getCreatedAt(){return createdAt;}
