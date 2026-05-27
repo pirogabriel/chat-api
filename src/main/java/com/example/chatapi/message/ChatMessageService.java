@@ -21,9 +21,8 @@ public class ChatMessageService {
         this.appUserRepository = appUserRepository;
     }
 
-    public ChatMessageResponseDTO sendMessage(Integer roomId, SendMessageRequest request){
+    public ChatMessageResponseDTO sendMessage(Integer roomId, SendMessageRequest request, String username){
         ChatRoom room = chatRoomRepository.findById(roomId).orElseThrow(() -> new IllegalArgumentException("Room not found"));
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         AppUser sender = appUserRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
         ChatMessage message = new ChatMessage(request.getContent(), sender, room);
         ChatMessage savedMessage = chatMessageRepository.save(message);

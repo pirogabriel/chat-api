@@ -3,6 +3,7 @@ package com.example.chatapi.message;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class ChatMessageController {
         return chatMessageService.getMessageByRoom(roomId);
     }
     @PostMapping
-    public ChatMessageResponseDTO sendMessage(@PathVariable Integer roomId, @Valid @RequestBody SendMessageRequest request){
-        return chatMessageService.sendMessage(roomId, request);
+    public ChatMessageResponseDTO sendMessage(@PathVariable Integer roomId, @Valid @RequestBody SendMessageRequest request, Principal principal){
+        return chatMessageService.sendMessage(roomId, request, principal.getName());
     }
 }
